@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { ResponsiveEmbed } from "react-bootstrap";
+import { Col, Container, ResponsiveEmbed, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { Album, Artist } from "../interfaces/ISong";
+import { Album, Artist, Contributor } from "../interfaces/ISong";
 import Loader from "../Loader";
 
 interface ITrack {
@@ -25,7 +25,8 @@ interface ITrack {
     bpm: number;
     gain: number;
     album?:Album;
-    artist?:Artist
+    artist?:Artist;
+    contributors?: Contributor[]
 }
 
 function DetailPage() {
@@ -56,19 +57,43 @@ function DetailPage() {
             
         }
     }
-        return ( 
-        <div className='h-100 text-white'>
-            {isLoading? (<Loader/>) : (<div>
-            <div>
-                <img src={song?.album?.cover} alt={song?.title}/>
-            </div>
-           <p>{song?.title}</p>
-           <p>{song?.artist?.name}</p>
-          <a href={song?.link} ><p>{song?.link}</p> </a>
-           <p></p>
-        </div>
-           )}
-        </div>
+        return (
+            <Container>
+                        <p className='h1 mt-3 text-white'>{song?.title}</p>
+                <Row>
+                    <Col>
+                        <div className='h-100 text-white d-flex'>
+                            {isLoading? (<Loader/>) : (<div>
+                            <div>
+                                <img src={song?.album?.cover_big} alt={song?.title}/>
+                            </div>
+                        <p>Artist : <span className='h6'>{song?.artist?.name}</span></p>
+                        <a href={song?.link} ><p>{song?.link}</p> </a>
+                        <p></p>
+                        </div>
+                        )}
+                        <div>
+                        <p className='h3'>Contributors</p>
+                    <div>
+
+                    {song?.contributors?.map(contributor => 
+                        <div className='text-left ml-3'>
+                            <p>Name : {contributor.name}</p>
+                            <p>Role : {contributor.role}</p>
+                            <p>Link : {contributor.link}</p>
+                            <p>TrackList : {contributor.tracklist}</p>
+                        </div>
+                    )}
+                    </div>
+                        </div>
+                        </div>
+                    
+                    </Col>
+                </Row>
+                <Row>
+                    
+                </Row>
+            </Container> 
      );
 }
 
