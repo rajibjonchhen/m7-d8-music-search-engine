@@ -4,23 +4,22 @@ import {FcMusic} from 'react-icons/fc'
 import { Dispatch, SetStateAction } from "react";
 interface SearchProps {
     search:string
-    setSearch: Dispatch<SetStateAction<string>>
+    setSearch: Function //Dispatch<SetStateAction<string>>
+    fetchSongs: Function
 }
 
-function MyNavbar({search, setSearch}:SearchProps) {
+function MyNavbar({search, setSearch, fetchSongs}:SearchProps) {
 
-    // const handleChange = (e : ChangeEvent<HTMLInputElement>) => {
-    //     console.log(e)
-    //     e.preventDefault()
-    //     setSearch(e.target.value)
-    //     }
+    const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
+        console.log(search)
+        e.preventDefault()
+        setSearch(e.target.value)
+        }
 
-    //     const handleSubmit = (e : ChangeEvent<HTMLInputElement>) => {
-            
-    //     }
+       
 
     return ( 
-        <Navbar bg="dark" expand="lg" variant="dark">
+        <Navbar bg="dark" expand="lg" variant="dark" style={{position:'sticky', top:0, zIndex:1, borderBottom:'1px solid black'}}>
   <Container fluid>
     <Navbar.Brand>
         <Link to='/'>
@@ -42,7 +41,6 @@ function MyNavbar({search, setSearch}:SearchProps) {
             Home
         </Link>
         </Nav.Link>
-        <Nav.Link href="#action2">Link</Nav.Link>
         <NavDropdown title="Link" id="navbarScrollingDropdown">
           <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
           <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
@@ -51,20 +49,18 @@ function MyNavbar({search, setSearch}:SearchProps) {
             Something else here
           </NavDropdown.Item>
         </NavDropdown>
-        <Nav.Link href="#" disabled>
-          Link
-        </Nav.Link>
+       
       </Nav>
-      {/* <Form className="d-flex">
+      <Form className="d-flex ml-auto">
         <FormControl
           type="search"
           placeholder="Search"
           className="me-2"
           aria-label="Search"
-          onChange={(e) => handleChange}
+          onChange={(e) => setSearch(e.target.value)}
         />
-        <Button variant="outline-success" onClick={(e) => handleSubmit}>Search</Button>
-      </Form> */}
+        <Button variant="outline-success" onClick={(e) => fetchSongs(search)}>Search</Button>
+      </Form>
     </Navbar.Collapse>
   </Container>
 </Navbar>

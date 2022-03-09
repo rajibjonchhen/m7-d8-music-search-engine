@@ -57,7 +57,7 @@ function DetailPage() {
         }
     }
         return ( 
-        <div>
+        <div className='h-100 text-white'>
             {isLoading? (<Loader/>) : (<div>
             <div>
                 <img src={song?.album?.cover} alt={song?.title}/>

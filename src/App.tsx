@@ -12,24 +12,22 @@ interface Song {
 }
 
 function App() {
-  const[search, setSearch] = useState("")
+  const[search, setSearch] = useState("whatever")
   const [songs, setSongs] = useState<ISong[]>([])
-    const [isLoading, setIsLoading] = useState(true)
-    const [errMsg, setErrMsg] = useState("")
+  const [isLoading, setIsLoading] = useState(true)
+  const [errMsg, setErrMsg] = useState("")
 
     useEffect(() => {
-        fetchSongs()
-    },[])
+      if(search.length>2){
+        console.log(search);
+        fetchSongs(search)
+      }
+    },[search])
 
-    // const handleChange = (e : ChangeEvent<HTMLInputElement>) => {
-    // console.log(e)
-    // e.preventDefault()
-    // setSearch(e.target.value)
-    // }
 
-    const fetchSongs = async() => {
+    const fetchSongs = async(search:string) => {
       try {
-          const response = await fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=whatever")
+          const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=${search}`)
           if(response.ok){
               const {data} = await response.json()
               setSongs(data)
@@ -49,8 +47,8 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="App bg-dark">
-        <MyNavbar search={search} setSearch={setSearch} />
+      <div className="App bg-dark h-100" style={{minHeight:'100vh'}}>
+        <MyNavbar search={search} setSearch={setSearch}  fetchSongs={fetchSongs}/>
       <Routes>
         <Route path='/' element={<Home songs={songs} isLoading={isLoading}/>}/>
         <Route path='/DetailPage/:id' element={<DetailPage/>}/>
