@@ -10,7 +10,7 @@ function App() {
   const[search, setSearch] = useState()
   return (
     <BrowserRouter>
-      <div className="App bg-light">
+      <div className="App bg-dark">
         <MyNavbar/>
       <Routes>
         <Route path='/' element={<Home/>}/>

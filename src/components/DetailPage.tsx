@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ResponsiveEmbed } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { Album, Artist } from "../interfaces/ISong";
+import Loader from "../Loader";
 
 interface ITrack {
     id: number;
@@ -31,7 +32,7 @@ function DetailPage() {
 
     const params = useParams()
     const [song, setSong] = useState<ITrack>()
-
+    const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {
         let id = params.id
         fetchSong(id)
@@ -44,20 +45,29 @@ function DetailPage() {
                 const data = await response.json()
                 console.log(data);
                 setSong(data)
-                
-            } 
+                setIsLoading(false)
+            } else {
+                console.log('error on getting specific track')
+                setIsLoading(false)
+            }
         } catch (error) {
             console.log(error);
+            setIsLoading(false)
             
         }
     }
         return ( 
         <div>
+            {isLoading? (<Loader/>) : (<div>
             <div>
                 <img src={song?.album?.cover} alt={song?.title}/>
             </div>
            <p>{song?.title}</p>
+           <p>{song?.artist?.name}</p>
+          <a href={song?.link} ><p>{song?.link}</p> </a>
            <p></p>
+        </div>
+           )}
         </div>
      );
 }
