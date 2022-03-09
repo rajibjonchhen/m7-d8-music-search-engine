@@ -1,5 +1,7 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { Col, Container, Row } from "react-bootstrap";
 import { ISong } from "../interfaces/ISong";
+import DetailPage from "./DetailPage";
 import SingleSong from "./SingleSong";
 
 interface Song {
@@ -35,12 +37,17 @@ function Home() {
     }
 
     return ( 
-        <div>
+        <Container>
             <div>
                 <input id='search' value={search} onChange={(e) => handleChange(e)} placeholder="type and enter"/>
             </div>
-            {songs.map (song => <SingleSong song={song} key={song.id}/>)}
-        </div>
+            <Row>
+                <Col>
+                    {songs.map (song => <SingleSong song={song} key={song.id}/>)}
+                </Col>
+              
+            </Row>
+        </Container>
      );
 }
 
