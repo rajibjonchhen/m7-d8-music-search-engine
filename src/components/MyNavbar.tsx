@@ -16,8 +16,6 @@ function MyNavbar({search, setSearch, fetchSongs}:SearchProps) {
         setSearch(e.target.value)
         }
 
-       
-
     return ( 
         <Navbar bg="dark" expand="lg" variant="dark" style={{position:'sticky', top:0, zIndex:1, borderBottom:'1px solid black'}}>
   <Container fluid>

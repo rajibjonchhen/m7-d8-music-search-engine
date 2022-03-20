@@ -6,7 +6,7 @@ import Home from './components/Home';
 import DetailPage from './components/DetailPage';
 import MyNavbar from './components/MyNavbar';
 import { ISong } from './interfaces/ISong';
-
+import './style.css'
 interface Song {
   song : ISong
 }

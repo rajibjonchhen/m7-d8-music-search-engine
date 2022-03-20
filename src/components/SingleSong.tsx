@@ -9,14 +9,14 @@ function SingleSong({song}:SingleSongProps) {
     return ( 
         <Col>
         <Link to={`/DetailPage/${song.id}`}>
-        <Card style={{ width: '12rem' }} className='mt-3'>
+        <Card  className='single-card mt-3 text-left'>
             <Card.Img variant="top" src={song.album?.cover_big}  alt={song.title}/>
           
-            <Card.Body>
+            <Card.Body >
+                <p className='' style={{fontSize:'10px'}}>Rank : {song.rank}</p>    
             <p className='h6'>{song.title}</p>
                 <Card.Text>
                 
-                <p className=''> <small>Rank : {song.rank}</small></p>    
            
                 </Card.Text>
                 
