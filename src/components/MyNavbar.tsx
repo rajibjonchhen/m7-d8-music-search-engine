@@ -17,7 +17,7 @@ function MyNavbar({search, setSearch, fetchSongs}:SearchProps) {
         }
 
     return ( 
-        <Navbar bg="dark" expand="lg" variant="dark" style={{position:'sticky', top:0, zIndex:1, borderBottom:'1px solid black'}}>
+        <Navbar bg="dark" expand="lg" variant="dark" style={{position:'sticky', top:0, zIndex:1, borderBottom:'1px solid black', color:'white'}}>
   <Container fluid>
     <Navbar.Brand>
         <Link to='/'>
@@ -34,12 +34,12 @@ function MyNavbar({search, setSearch, fetchSongs}:SearchProps) {
         style={{ maxHeight: '100px' }}
         navbarScroll
       >
-        <Nav.Link>
         <Link to='/'>
-            Home
+          <div className='nav-link text-light'>
+              Home
+          </div>
         </Link>
-        </Nav.Link>
-        <NavDropdown title="Link" id="navbarScrollingDropdown">
+        <NavDropdown title="Link" id="navbarScrollingDropdown" className='text-light'>
           <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
           <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
           <NavDropdown.Divider />
